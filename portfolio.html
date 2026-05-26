@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Your Name] — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #0f1c2e;
+    --ink:    #1a2b3c;
+    --steel:  #3a5068;
+    --mist:   #8fa8bf;
+    --cloud:  #d6e4f0;
+    --snow:   #f4f8fb;
+    --white:  #ffffff;
+    --accent: #1d6fa4;
+    --accent2:#0d4d78;
+    --gold:   #c9963a;
+    --serif:  'DM Serif Display', Georgia, serif;
+    --sans:   'Outfit', sans-serif;
+    --mono:   'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--snow);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 60px;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    color: var(--cloud);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+  .nav-logo span { color: var(--gold); }
+
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    color: var(--mist);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--white); }
+
+  /* ── HERO ── */
+  #home {
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 80px 2.5rem 4rem;
+  }
+
+  .hero-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    color: var(--mist);
+    margin-bottom: 2rem;
+  }
+
+  .hero-bio {
+    font-size: 1.05rem;
+    color: var(--cloud);
+    line-height: 1.8;
+    max-width: 640px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-bio .placeholder {
+    background: rgba(201,150,58,0.18);
+    border-radius: 3px;
+    padding: 0 4px;
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .skills-row {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .skill-tag {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--cloud);
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+  .skill-tag.placeholder-tag {
+    border-style: dashed;
+    color: var(--mist);
+    opacity: 0.6;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--white);
+    text-decoration: none;
+    padding: 0.75rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    border-radius: 4px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .hero-cta:hover { background: var(--accent2); transform: translateY(-1px); }
+
+  /* ── SECTION SHELL ── */
+  .section {
+    padding: 5rem 2.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-rule {
+    width: 48px; height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+    margin-bottom: 3rem;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--white); }
+  #projects .section { max-width: 1000px; }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 2rem;
+  }
+
+  .project-card {
+    border: 1.5px solid var(--cloud);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--snow);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .project-card:hover { box-shadow: 0 8px 32px rgba(15,28,46,0.1); transform: translateY(-2px); }
+
+  .project-screenshot {
+    width: 100%; height: 200px;
+    background: linear-gradient(135deg, var(--cloud) 0%, #c5d8e8 100%);
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 1.5px solid var(--cloud);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .screenshot-placeholder {
+    text-align: center;
+    color: var(--steel);
+  }
+
+  .screenshot-placeholder .icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .screenshot-placeholder p {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    opacity: 0.7;
+    letter-spacing: 0.05em;
+  }
+
+  .project-body { padding: 1.5rem; }
+
+  .project-type {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-title {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+
+  .project-problem {
+    font-size: 0.9rem;
+    color: var(--steel);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    border-left: 3px solid var(--gold);
+    padding-left: 0.75rem;
+  }
+
+  .stack-section { margin-bottom: 1rem; }
+  .stack-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--mist);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .stack-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .stack-tag {
+    background: var(--navy);
+    color: var(--cloud);
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    letter-spacing: 0.03em;
+  }
+
+  .reflection-section { margin-bottom: 1.25rem; }
+  .reflection-label {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--mist);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .reflection-text {
+    font-size: 0.88rem;
+    color: var(--steel);
+    line-height: 1.75;
+    font-style: italic;
+  }
+
+  .project-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+    transition: background 0.2s;
+  }
+  .link-github {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .link-github:hover { background: var(--ink); }
+  .link-demo {
+    background: transparent;
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+  }
+  .link-demo:hover { background: var(--accent); color: var(--white); }
+
+  /* ── RESUME & CONTACT ── */
+  #contact { background: var(--snow); }
+
+  .resume-embed-box {
+    border: 2px dashed var(--cloud);
+    border-radius: 8px;
+    padding: 2.5rem;
+    text-align: center;
+    background: var(--white);
+    margin-bottom: 2.5rem;
+  }
+  .resume-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+  .resume-embed-box h3 {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+  .resume-embed-box p {
+    font-size: 0.88rem;
+    color: var(--mist);
+    margin-bottom: 1.25rem;
+  }
+  .resume-btn {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.65rem 1.75rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .resume-btn:hover { background: var(--accent2); }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .contact-card {
+    background: var(--white);
+    border: 1.5px solid var(--cloud);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .contact-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(29,111,164,0.1); }
+
+  .contact-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .contact-info .label {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--mist);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.1rem;
+  }
+  .contact-info .value {
+    font-size: 0.88rem;
+    color: var(--navy);
+    font-weight: 500;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    text-align: center;
+    padding: 2rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--steel);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    nav { padding: 0 1.25rem; }
+    nav ul { gap: 1rem; }
+    .hero-inner, .section { padding: 80px 1.25rem 3rem; }
+    #home { padding: 80px 1.25rem 3rem; }
+    .project-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ NAV ══════════════ -->
+<nav>
+  <div class="nav-logo"><span>&lt;</span> YourName <span>/&gt;</span></div>
+  <ul>
+    <li><a href="#home">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Resume</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════ PAGE 1 — BIO ══════════════ -->
+<section id="home">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">// portfolio · class of [YEAR]</p>
+    <h1 class="hero-name">Shrihan Af=garwal</h1>
+    <p class="hero-title">Aspiring <span style="color: var(--gold)">[Computer engineer/Tech expert/Robotics engineer]</span></p>
+
+    <p class="hero-bio">
+      I am a Computer and Information Sciences student at
+      <span class="placeholder">Morris County School of Technology</span>,
+      with a strong foundation in
+      <span class="placeholder">object-oriented programming, web development, robot design</span>.
+      My technical interests center on
+      <span class="placeholder">Cyber security / Desiging and building electronic systema / robotics</span>.
+      Over the past year I have developed hands-on experience with
+      <span class="placeholder">Java, C++, Python / Website development / Robotics competitions (Desiging and building a robot for First Robotics)</span>,
+      and I am actively pursuing opportunities in
+      <span class="placeholder">[internships / college programs / entry-level roles]</span>
+      that will allow me to contribute meaningfully to real-world projects.
+    </p>
+
+    <!-- Replace placeholder tags with your actual skills -->
+    <div class="skills-row">
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">Java</span>
+      <span class="skill-tag">C++</span>
+      <span class="skill-tag placeholder-tag">Wiring Electrical Systems</span>
+      <span class="skill-tag placeholder-tag">Building Mechanical Systems</span>
+    </div>
+
+    <a href="#projects" class="hero-cta">View My Projects ↓</a>
+  </div>
+</section>
+
+<!-- ══════════════ PAGE 2 — PROJECTS ══════════════ -->
+<div id="projects" style="background: var(--white);">
+<div class="section">
+  <p class="section-label">// page 02</p>
+  <h2 class="section-title">Project Showcase</h2>
+  <div class="section-rule"></div>
+
+  <div class="project-grid">
+
+    <!-- ── PROJECT 1 ── -->
+    <div class="project-card">
+      <div class="project-screenshot">
+        <div class="screenshot-placeholder">
+          <span class="icon">🖼</span>
+          <p>Add screenshot or demo GIF here</p>
+        </div>
+        <!-- Replace the div above with:
+          <img src="your-screenshot.png" alt="Project 1 Screenshot" style="width:100%;height:100%;object-fit:cover;">
+        -->
+      </div>
+      <div class="project-body">
+        <p class="project-type">[ CLI / GUI / Web / Hardware ]</p>
+        <h3 class="project-title">[Project One Title]</h3>
+
+        <div class="project-problem">
+          <strong>Problem:</strong> [Describe what this application does and what real-world problem it solves. 2–3 sentences.]
+        </div>
+
+        <div class="stack-section">
+          <p class="stack-label">Tech Stack</p>
+          <div class="stack-tags">
+            <span class="stack-tag">[Language]</span>
+            <span class="stack-tag">[Library/Framework]</span>
+            <span class="stack-tag">[Tool/Hardware]</span>
+          </div>
+        </div>
+
+        <div class="reflection-section">
+          <p class="reflection-label">Process &amp; Reflection</p>
+          <p class="reflection-text">
+            [Explain your design thinking, how you approached debugging, and one specific challenge you overcame. 3–5 sentences.]
+          </p>
+        </div>
+
+        <div class="project-links">
+          <a href="#" class="project-link link-github">⌥ GitHub Repo</a>
+          <a href="#" class="project-link link-demo">▶ Live Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROJECT 2 ── -->
+    <div class="project-card">
+      <div class="project-screenshot">
+        <div class="screenshot-placeholder">
+          <span class="icon">🖼</span>
+          <p>Add screenshot or demo GIF here</p>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-type">[ CLI / GUI / Web / Hardware ]</p>
+        <h3 class="project-title">[Project Two Title]</h3>
+
+        <div class="project-problem">
+          <strong>Problem:</strong> [Describe what this application does and what real-world problem it solves. 2–3 sentences.]
+        </div>
+
+        <div class="stack-section">
+          <p class="stack-label">Tech Stack</p>
+          <div class="stack-tags">
+            <span class="stack-tag">[Language]</span>
+            <span class="stack-tag">[Library/Framework]</span>
+            <span class="stack-tag">[Tool/Hardware]</span>
+          </div>
+        </div>
+
+        <div class="reflection-section">
+          <p class="reflection-label">Process &amp; Reflection</p>
+          <p class="reflection-text">
+            [Explain your design thinking, how you approached debugging, and one specific challenge you overcame. 3–5 sentences.]
+          </p>
+        </div>
+
+        <div class="project-links">
+          <a href="#" class="project-link link-github">⌥ GitHub Repo</a>
+          <a href="#" class="project-link link-demo">▶ Live Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROJECT 3 ── -->
+    <div class="project-card">
+      <div class="project-screenshot">
+        <div class="screenshot-placeholder">
+          <span class="icon">🖼</span>
+          <p>Add screenshot or demo GIF here</p>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-type">[ CLI / GUI / Web / Hardware ]</p>
+        <h3 class="project-title">[Project Three Title]</h3>
+
+        <div class="project-problem">
+          <strong>Problem:</strong> [Describe what this application does and what real-world problem it solves. 2–3 sentences.]
+        </div>
+
+        <div class="stack-section">
+          <p class="stack-label">Tech Stack</p>
+          <div class="stack-tags">
+            <span class="stack-tag">[Language]</span>
+            <span class="stack-tag">[Library/Framework]</span>
+            <span class="stack-tag">[Tool/Hardware]</span>
+          </div>
+        </div>
+
+        <div class="reflection-section">
+          <p class="reflection-label">Process &amp; Reflection</p>
+          <p class="reflection-text">
+            [Explain your design thinking, how you approached debugging, and one specific challenge you overcame. 3–5 sentences.]
+          </p>
+        </div>
+
+        <div class="project-links">
+          <a href="#" class="project-link link-github">⌥ GitHub Repo</a>
+          <a href="#" class="project-link link-demo">▶ Live Demo</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PROJECT 4 ── -->
+    <div class="project-card">
+      <div class="project-screenshot">
+        <div class="screenshot-placeholder">
+          <span class="icon">🖼</span>
+          <p>Add screenshot or demo GIF here</p>
+        </div>
+      </div>
+      <div class="project-body">
+        <p class="project-type">[ CLI / GUI / Web / Hardware ]</p>
+        <h3 class="project-title">[Project Four Title]</h3>
+
+        <div class="project-problem">
+          <strong>Problem:</strong> [Describe what this application does and what real-world problem it solves. 2–3 sentences.]
+        </div>
+
+        <div class="stack-section">
+          <p class="stack-label">Tech Stack</p>
+          <div class="stack-tags">
+            <span class="stack-tag">[Language]</span>
+            <span class="stack-tag">[Library/Framework]</span>
+            <span class="stack-tag">[Tool/Hardware]</span>
+          </div>
+        </div>
+
+        <div class="reflection-section">
+          <p class="reflection-label">Process &amp; Reflection</p>
+          <p class="reflection-text">
+            [Explain your design thinking, how you approached debugging, and one specific challenge you overcame. 3–5 sentences.]
+          </p>
+        </div>
+
+        <div class="project-links">
+          <a href="#" class="project-link link-github">⌥ GitHub Repo</a>
+          <a href="#" class="project-link link-demo">▶ Live Demo</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /project-grid -->
+</div><!-- /section -->
+</div>
+
+<!-- ══════════════ PAGE 3 — RESUME & CONTACT ══════════════ -->
+<section id="contact">
+<div class="section">
+  <p class="section-label">// page 03</p>
+  <h2 class="section-title">Resume &amp; Contact</h2>
+  <div class="section-rule"></div>
+
+  <!-- Resume embed box -->
+  <div class="resume-embed-box">
+    <div class="resume-icon">📄</div>
+    <h3>[Your Name] — Technical Resume</h3>
+    <p>Upload your resume PDF and link it below. To embed it directly, replace this box with an &lt;iframe&gt;.</p>
+    <!-- Option A: Download link -->
+    <a href="resume.pdf" class="resume-btn" download>⬇ Download Resume (PDF)</a>
+    <!-- Option B: Embed inline — uncomment the line below and remove the box content above
+    <iframe src="resume.pdf" width="100%" height="600px" style="border:none; border-radius:4px;"></iframe>
+    -->
+  </div>
+
+  <!-- Contact links -->
+  <div class="contact-grid">
+
+    <a href="mailto:yourname@school.edu" class="contact-card">
+      <div class="contact-icon">✉️</div>
+      <div class="contact-info">
+        <p class="label">School Email</p>
+        <p class="value">[yourname@school.edu]</p>
+      </div>
+    </a>
+
+    <a href="https://github.com/yourusername" target="_blank" class="contact-card">
+      <div class="contact-icon">💻</div>
+      <div class="contact-info">
+        <p class="label">GitHub</p>
+        <p class="value">github.com/[yourusername]</p>
+      </div>
+    </a>
+
+    <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-card">
+      <div class="contact-icon">🔗</div>
+      <div class="contact-info">
+        <p class="label">LinkedIn</p>
+        <p class="value">linkedin.com/in/[yourprofile]</p>
+      </div>
+    </a>
+
+  </div>
+</div>
+</section>
+
+<footer>
+  &copy; [YEAR] [Your Name] · Built with HTML, CSS &amp; JavaScript
+</footer>
+
+</body>
+</html>
